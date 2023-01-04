@@ -4,9 +4,10 @@ django-appconf==1.0.5
 django-compressor==4.1
 django-environ==0.9.0
 django-libsass==0.8
+fontawesomefree==6.2.1
 libsass==0.22.0
 psycopg2==2.9.5
-rcssmin==1.0.6
-rjsmin==1.1.0
+rcssmin==1.1.0
+rjsmin==1.2.0
 six==1.16.0
 sqlparse==0.4.3
