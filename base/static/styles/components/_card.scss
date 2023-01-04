@@ -1,3 +1,8 @@
-.card-header {
-  background-color: rgb(96, 96, 160) !important;
+.card {
+  max-width: 50rem;
+}
+
+.card:hover {
+  border-color: #38D1F0!important;
+  transition: 0.5s;
 }
