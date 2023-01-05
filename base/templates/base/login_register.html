@@ -4,33 +4,36 @@
 
 <div class="container mt-3">
   {% if page == 'login' %}
-  <div>
-    <div>
-      <form method="POST" action="">
-        {% csrf_token %}
-        <label>Username:</label>
-        <input type="text" name="username" placeholder="Enter Username">
-        <label>Password:</label>
-        <input type="password" name="password" placeholder="Enter Password">
-        <input type="submit" value="login">
-      </form>
-      <p>Haven't sign up yet?</p>
-      <a href="{% url 'register' %}">Sign up</a>
-    </div>
+  <h1>Login</h1>
+  <div class="mb-3">
+    <form method="POST" action="" class="mb-3">
+      {% csrf_token %}
+      <div class="mb-3 col-7">
+        <label for="UsernameFormControlInput1" class="form-label">Username:</label>
+        <input type="text" name="username" placeholder="Enter Username" class="form-control" id="UsernameFormControlInput1">
+      </div>
+      <div class="mb-3 col-7">
+        <label for="PasswordFormControlInput1" class="form-label">Password:</label>
+        <input type="password" name="password" placeholder="Enter Password" class="form-control" id="PasswordFormControlInput1">
+      </div>
+      <input type="submit" value="Login" class="input-btn">
+    </form>
+    <p>Haven't sign up yet?</p>
+    <a href="{% url 'register' %}">Sign up</a>
   </div>
   {% else %}
-  <div>
-    <div>
-      <form method="POST" action="">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="register">
-      </form>
-      <p>Already signed up?</p>
-      <a href="{% url 'login' %}">Login</a>
-    </div>
+  <h1>Register</h1>
+  <div class="mb-3">
+    <form method="POST" action="" class="mb-3">
+      {% csrf_token %}
+      {{form.as_p}}
+      <input type="submit" value="Register" class="input-btn">
+    </form>
+    <p>Already signed up?</p>
+    <a href="{% url 'login' %}">Login</a>
   </div>
   {% endif %}
+  <a href="{% url 'home' %}">Back</a>
 </div>
 
 {% endblock content %}

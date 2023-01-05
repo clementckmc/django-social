@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -18,7 +19,7 @@ def loginPage(request):
         try:
             user = User.objects.get(username=username)
         except:
-            HttpResponse('invalid Username or password')
+            messages.error(request, 'User does not exist')
 
         user = authenticate(request, username=username, password=password)
 
@@ -26,7 +27,7 @@ def loginPage(request):
             login(request, user)
             return redirect('home')
         else:
-            HttpResponse('invalid Username or password')
+            messages.error(request, 'Username OR password does not exist')
 
     return render(request, 'base/login_register.html', {'page': page})
 
@@ -44,7 +45,7 @@ def registerPage(request):
             login(request, user)
             return redirect('home')
         else:
-            return HttpResponse('An error occurred during registration')
+            messages.error(request, 'An error occurred during registration')
     return render(request, 'base/login_register.html', {'form': form})
 
 def home(request):
