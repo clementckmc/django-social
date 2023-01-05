@@ -3,13 +3,5 @@
 
 body {
   font-family: 'Quicksand', sans-serif !important;
-}
-
-.navbar-nav .dropdown-menu {
-  position: absolute !important;
-}
-
-.dropdown-menu[data-bs-popper] {
-  top: 85% !important;
-  left: -25% !important;
+  overflow-x: hidden;
 }

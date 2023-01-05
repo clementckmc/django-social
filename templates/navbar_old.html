@@ -1,0 +1,31 @@
+<!-- <nav class="navbar navbar-light" style="background-color: #38D1F0;">
+  <div class="container">
+
+    <a class="navbar-brand" href="{% url 'home' %}"><i class="fa-solid fa-people-arrows"></i> Social</a>
+
+    <form>
+      <input class="form-control" type="search" placeholder="🔍 Search" aria-label="Search...">
+    </form>
+
+      <div class="navbar-nav">
+        {% if request.user.is_authenticated %}
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{request.user.username}}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">My Profile</a></li>
+            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        </div>
+        {% else %}
+        <div class="d-flex">
+          <a class="nav-link mx-2" href="{% url 'register' %}">Register</a>
+          <a class="nav-link mx-1" href="{% url 'login' %}">Login</a>
+        </div>
+        {% endif %}
+
+    </div>
+
+  </div>
+</nav> -->

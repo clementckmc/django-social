@@ -1,0 +1,54 @@
+.sidenav {
+  min-height: 100vh;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #38D1F0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  min-width: max-content;
+}
+
+.side-title {
+  margin-left: 6px;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+}
+
+.side-item {
+  margin-left: 6px;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.side-title:hover {
+  color: black;
+}
+
+.side-item:hover {
+  color: black;
+  transition: 0.5s;
+}
+
+.sidenav input {
+  background-color: #91D8E4;
+  padding: 6px 6px 6px 6px;
+  border-radius: 12px;
+  border-width: 0;
+}
+
+.main {
+  min-height: 100vh;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

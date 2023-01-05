@@ -11,6 +11,15 @@ class Post(models.Model):
     class Meta:
         ordering = ['-updated', '-created'] # newest items first
 
+    def get_reply_count(self):
+        count = Reply.objects.filter(post=self).count()
+        if count == 0:
+            return "no replies"
+        elif count == 1:
+            return "1 reply"
+        else:
+            return f"{count} replies"
+
 class Reply(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post =  models.ForeignKey(Post, on_delete=models.CASCADE)

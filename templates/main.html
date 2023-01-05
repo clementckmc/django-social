@@ -18,15 +18,20 @@
   </head>
 
   <body>
-    {% include 'navbar.html' %}
+    <div class="row">
 
-    <div class="container mt-3">
-    {% if messages %}
-    <ul class="messages" style="list-style-type: none;">
-        {% for message in messages %}
-        <li class="alert alert-warning" role="alert">{{ message }}</li>
-        {% endfor %}
-    </ul>
+    <div class="col-2">
+      {% include 'navbar.html' %}
+    </div>
+
+      <div class="col-10 container mt-3">
+      {% if messages %}
+      <ul class="messages" style="list-style-type: none;">
+          {% for message in messages %}
+          <li class="alert alert-warning" role="alert">{{ message }}</li>
+          {% endfor %}
+      </ul>
+      </div>
     </div>
     {% endif %}
 

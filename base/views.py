@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .models import Post
+from .models import Post, Reply
 from .forms import PostForm
 
 # Create your views here.
@@ -51,7 +51,8 @@ def registerPage(request):
 
 def home(request):
     posts = Post.objects.all()
-    context = {'posts': posts}
+    replies = Reply.objects.all()
+    context = {'posts': posts, 'replies': replies}
     return render(request, 'base/home.html', context)
 
 @login_required(login_url='login')
@@ -65,3 +66,10 @@ def createPost(request):
         )
         return redirect('home')
     return render(request, 'base/post_form.html', {'form': form})
+
+def post(request, pk):
+    post = Post.objects.get(id=pk)
+    replies = post.reply_set.all()
+
+    context= {'post': post, 'replies': replies}
+    return render(request, 'base/post.html', context)
