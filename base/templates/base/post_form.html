@@ -3,10 +3,14 @@
 {% block content %}
 
 <div class="container mt-3">
+  <p>{{request.user.username}}</p>
   <form method="POST" action="">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">New Post</label>
+      <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="{{request.user.username}}, share your thoughts! "></textarea>
+    </div>
+    <input type="submit" value="Submit" class="input-btn">
   </form>
 
 </div>

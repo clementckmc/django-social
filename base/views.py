@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .models import Post
 from .forms import PostForm
@@ -53,15 +54,14 @@ def home(request):
     context = {'posts': posts}
     return render(request, 'base/home.html', context)
 
+@login_required(login_url='login')
 def createPost(request):
     form = PostForm()
     if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            form.save()
-        # Post.objects.create(
-        #     user=request.POST.get('user'),
-        #     content=request.POST.get('content')
-        # )
+        content = request.POST.get('content')
+        Post.objects.create(
+            user=request.user,
+            content=content
+        )
         return redirect('home')
     return render(request, 'base/post_form.html', {'form': form})
