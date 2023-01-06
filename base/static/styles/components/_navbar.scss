@@ -8,10 +8,12 @@
   overflow-x: hidden;
   padding-top: 20px;
   min-width: max-content;
+  position: fixed;
 }
 
 .side-title {
-  margin-left: 6px;
+  margin-left: 12px;
+  margin-right: 12px;
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 25px;
@@ -20,7 +22,8 @@
 }
 
 .side-item {
-  margin-left: 6px;
+  margin-left: 12px;
+  margin-right: 12px;
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 25px;

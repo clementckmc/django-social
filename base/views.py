@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .models import Post, Reply
-from .forms import PostForm
+from .forms import PostForm, ReplyForm
 
 # Create your views here.
 def loginPage(request):
@@ -71,5 +71,18 @@ def post(request, pk):
     post = Post.objects.get(id=pk)
     replies = post.reply_set.all()
 
-    context= {'post': post, 'replies': replies}
+    # create reply
+    replyForm = ReplyForm()
+    if request.method == 'POST':
+        body = request.POST.get('body')
+        Reply.objects.create(
+            user=request.user,
+            post=post,
+            body=body
+        )
+        return redirect('post', pk=post.id)
+
+    # edit post
+
+    context= {'post': post, 'replies': replies, 'replyForm': replyForm}
     return render(request, 'base/post.html', context)

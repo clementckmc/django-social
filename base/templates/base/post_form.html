@@ -7,8 +7,7 @@
   <form method="POST" action="">
     {% csrf_token %}
     <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">New Post</label>
-      <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="{{request.user.username}}, share your thoughts! "></textarea>
+      <textarea name="content" class="form-control" rows="3" placeholder="{{request.user.username}}, share your thoughts! "></textarea>
     </div>
     <input type="submit" value="Submit" class="input-btn">
   </form>

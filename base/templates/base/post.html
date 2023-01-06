@@ -11,10 +11,19 @@
     </div>
     <div class="card-body">
       <p class="card-text">{{post.content}}</p>
-      <hr>
       {% for reply in replies %}
+        <hr>
         {{reply.user.username}}: {{reply.body}}
       {% endfor %}
+      <hr>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+          <span class="input-group-text">{{request.user.username}}</span>
+          <textarea class="form-control" aria-label="With textarea" rows="2" name="body" placeholder="Reply to this post"></textarea>
+        </div>
+        <button type="submit" class="input-btn"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
     </div>
   </div>
 </div>
