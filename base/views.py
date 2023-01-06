@@ -86,9 +86,14 @@ def post(request, pk):
 
     # edit post
 
-
-    # delete post
-
-
     context= {'post': post, 'replies': replies}
     return render(request, 'base/post.html', context)
+
+@login_required(login_url='login')
+def deletePost(request, pk):
+    post = Post.objects.get(id=pk)
+    if request.user != post.user:
+        return HttpResponse('You are not allowed here')
+    if request.method == 'POST':
+        post.delete()
+        return redirect('home')
