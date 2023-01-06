@@ -20,6 +20,9 @@ class Post(models.Model):
         else:
             return f"{count} replies"
 
+    def get_like_count(self):
+        return Like.objects.filter(post=self).count()
+
 class Reply(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post =  models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -33,6 +36,6 @@ class Reply(models.Model):
     def __str__(self):
         return self.body[0:50]
 
-# class Like(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     post =  models.ForeignKey(Post, on_delete=models.CASCADE)
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)

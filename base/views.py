@@ -72,17 +72,23 @@ def post(request, pk):
     replies = post.reply_set.all()
 
     # create reply
-    replyForm = ReplyForm()
+    # replyForm = ReplyForm()
     if request.method == 'POST':
-        body = request.POST.get('body')
-        Reply.objects.create(
-            user=request.user,
-            post=post,
-            body=body
-        )
-        return redirect('post', pk=post.id)
+        if 'reply' in request.POST:
+            body = request.POST.get('body')
+            Reply.objects.create(
+                user=request.user,
+                post=post,
+                body=body
+            )
+            return redirect('post', pk=post.id)
+
 
     # edit post
 
-    context= {'post': post, 'replies': replies, 'replyForm': replyForm}
+
+    # delete post
+
+
+    context= {'post': post, 'replies': replies}
     return render(request, 'base/post.html', context)
