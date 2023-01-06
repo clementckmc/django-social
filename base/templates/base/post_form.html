@@ -4,7 +4,8 @@
 
 <div class="container mt-3">
   {% if page %}
-    <h2 class="mb-5">Edit post</h2>
+    <h2 class="mb-3">Edit post</h2>
+    <a href="{% url 'post' post.id %}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-arrow-left"></i></a>
   {% else %}
     <h2 class="mb-5">New post</h2>
   {% endif %}
@@ -16,7 +17,6 @@
     </div>
     <input type="submit" value="Submit" class="input-btn">
   </form>
-
 </div>
 
 {% endblock content %}

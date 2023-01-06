@@ -3,19 +3,21 @@
 {% block content %}
 
 <div class="container mt-3">
-  <a href="{% url 'home' %}">Back</a>
+  <a href="{% url 'home' %}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-arrow-left"></i></a>
   <div class="card border-light mx-auto mt-3">
     <div class="card-header bg-light d-flex justify-content-between">
       <h5>{{post.user}}</h5>
       <div>
         <p class="text-muted">{{post.updated}}</p>
-        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fa-solid fa-list-ul"></i>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'update-post' post.id %}">Edit</a></li>
-          <li><a class="dropdown-item" href="#delete" data-bs-toggle="modal" data-bs-target="#DeleteModal">Delete</a></li>
-        </ul>
+        {% if request.user == post.user %}
+          <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-list-ul"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'update-post' post.id %}">Edit</a></li>
+            <li><a class="dropdown-item" href="#delete" data-bs-toggle="modal" data-bs-target="#DeleteModal">Delete</a></li>
+          </ul>
+        {% endif %}
       </div>
     </div>
     {% include 'base/post_delete.html' %}

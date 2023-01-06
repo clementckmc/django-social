@@ -110,5 +110,5 @@ def updatePost(request, pk):
             form.save()
             return redirect('post', pk)
 
-    context = {'form': form, 'page': page}
+    context = {'form': form, 'page': page, 'post': post}
     return render(request, 'base/post_form.html', context)
