@@ -5,12 +5,14 @@
 
   <div class="mx-auto">
     <div class="d-grid col-6 mx-auto">
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated and q == '' %}
 
       <a href="{% url 'create-post' %}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> New post</a>
 
+    {% elif q %}
+      <p><a href="{% url 'home' %}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-arrow-left"></i> All posts</a> Search results for 「{{q}}」</p>
     {% else %}
-    <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to interact with others!</p>
+      <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to interact with others!</p>
     {% endif %}
     </div>
   </div>

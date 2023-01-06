@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 from .models import Post, Reply
 from .forms import PostForm, ReplyForm
 
@@ -50,9 +51,13 @@ def registerPage(request):
     return render(request, 'base/login_register.html', {'form': form})
 
 def home(request):
-    posts = Post.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    posts = Post.objects.filter(
+        Q(content__icontains=q)
+    )
+    # posts = Post.objects.all()
     replies = Reply.objects.all()
-    context = {'posts': posts, 'replies': replies}
+    context = {'posts': posts, 'replies': replies, 'q': q}
     return render(request, 'base/home.html', context)
 
 @login_required(login_url='login')

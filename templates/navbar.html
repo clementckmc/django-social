@@ -10,7 +10,7 @@
   <hr>
   {% if request.user.is_authenticated %}
     <form class="text-center">
-      <input type="search" placeholder="🔍 Search..." aria-label="Search">
+      <input type="search" placeholder="🔍 Search..." aria-label="Search" name="q">
     </form>
     <a class="side-item" href="{% url 'home' %}"><i class="fa-solid fa-globe"></i> All Posts</a>
     <a class="side-item" href="#following"><i class="fa-solid fa-users-viewfinder"></i> Following</a>
