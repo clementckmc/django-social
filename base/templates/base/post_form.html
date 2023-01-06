@@ -3,11 +3,16 @@
 {% block content %}
 
 <div class="container mt-3">
-  <p>{{request.user.username}}</p>
+  {% if page %}
+    <h2 class="mb-5">Edit post</h2>
+  {% else %}
+    <h2 class="mb-5">New post</h2>
+  {% endif %}
+  <h5 class="mb-3">{{request.user.username}}</h5>
   <form method="POST" action="">
     {% csrf_token %}
     <div class="mb-3">
-      <textarea name="content" class="form-control" rows="3" placeholder="{{request.user.username}}, share your thoughts! "></textarea>
+      {{form.content}}
     </div>
     <input type="submit" value="Submit" class="input-btn">
   </form>

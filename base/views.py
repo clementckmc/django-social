@@ -83,9 +83,6 @@ def post(request, pk):
             )
             return redirect('post', pk=post.id)
 
-
-    # edit post
-
     context= {'post': post, 'replies': replies}
     return render(request, 'base/post.html', context)
 
@@ -97,3 +94,21 @@ def deletePost(request, pk):
     if request.method == 'POST':
         post.delete()
         return redirect('home')
+
+@login_required(login_url='login')
+def updatePost(request, pk):
+    page = 'edit'
+    post = Post.objects.get(id=pk)
+    form = PostForm(instance=post)
+
+    if request.user != post.user:
+        return HttpResponse('You are not allowed here')
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post', pk)
+
+    context = {'form': form, 'page': page}
+    return render(request, 'base/post_form.html', context)
