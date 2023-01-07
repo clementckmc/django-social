@@ -1,13 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
-from .models import Post, Reply
-from .forms import PostForm, ReplyForm
+from .models import Post, Reply, User
+from .forms import PostForm, ReplyForm, UserForm, CustomUserCreationForm
 
 # Create your views here.
 def loginPage(request):
@@ -38,10 +36,10 @@ def logoutUser(request):
     return redirect('home')
 
 def registerPage(request):
-    form = UserCreationForm()
+    form = CustomUserCreationForm()
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
