@@ -119,5 +119,6 @@ def updatePost(request, pk):
 @login_required(login_url='login')
 def profile(request):
     user = request.user
-    context = {'user': user}
+    posts = Post.objects.filter(user=user)
+    context = {'user': user, 'posts': posts}
     return render(request, 'base/profile.html', context)

@@ -16,25 +16,8 @@
     {% endif %}
     </div>
   </div>
+  {% include 'base/post_component.html' %}
 
-  {% for post in posts %}
-  <div class="card border-light mx-auto mt-3">
-    <div class="card-header bg-light d-flex justify-content-between">
-      <h5>{{post.user}}</h5>
-      <p class="text-muted">{{post.updated}}</p>
-    </div>
-    <a href="{% url 'post' post.id %}">
-      <div class="card-body">
-        <p class="card-text">{{post.content}}</p>
-      </div>
-    </a>
-      <div class="card-footer">
-        <i class="fa-regular fa-thumbs-up like"></i> {{post.get_like_count}}
-        <br>
-        {{post.get_reply_count}}
-      </div>
-  </div>
-  {% endfor %}
 
 </div>
 
