@@ -2,7 +2,7 @@
   <a class="side-title text-center" href="{% url 'home' %}"><i class="fa-solid fa-people-arrows"></i> Social</a>
   <hr>
   {% if request.user.is_authenticated %}
-    <a class="side-title" href="#profile">{{request.user.username}}</a>
+    <a class="side-title" href="{% url 'profile' %}">{{request.user.username}}</a>
   {% else %}
     <a class="side-item" href="{% url 'login' %}">Login</a>
     <a class="side-item" href="{% url 'register' %}">Register</a>

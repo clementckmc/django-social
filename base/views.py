@@ -115,3 +115,9 @@ def updatePost(request, pk):
 
     context = {'form': form, 'page': page, 'post': post}
     return render(request, 'base/post_form.html', context)
+
+@login_required(login_url='login')
+def profile(request):
+    user = request.user
+    context = {'user': user}
+    return render(request, 'base/profile.html', context)
