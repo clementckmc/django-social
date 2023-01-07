@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 import environ
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Initialise environment variables
 env = environ.Env()
@@ -46,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'compressor',
     'fontawesomefree',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 AUTH_USER_MODEL = 'base.User'
@@ -135,9 +140,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-MEDIA_URL = '/images/'
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT = BASE_DIR / 'static/images'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# MEDIA_ROOT = BASE_DIR / 'static/images'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -154,3 +161,10 @@ STATICFILES_FINDERS = [
 COMPRESS_PRECOMPILERS = [
     ('text/x-scss', 'django_libsass.SassCompiler'),
 ]
+
+# cloudinary
+CLOUDINARY_STORAGE = {
+  'CLOUD_NAME': env("CLOUD_NAME"),
+  'API_KEY': env("API_KEY"),
+  'API_SECRET': env("API_SECRET")
+}

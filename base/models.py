@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    bio = models.TextField(null=True)
+    bio = models.TextField(null=True, blank=True)
+    avatar = models.ImageField(upload_to='images/', default='media/images/default_ym3edb.jpg')
 
 # Create your models here.
 class Post(models.Model):

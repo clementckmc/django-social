@@ -1,9 +1,12 @@
 {% extends 'main.html' %}
 
 {% block content %}
+{% load cloudinary %}
 
 <div class="container mt-3">
   <h1>{{user.username}}'s profile page</h1>
+  <!-- <img src="{{user.avatar.url}}" alt="profile"> -->
+  {% cloudinary user.avatar.name width=200 height=200 %}
 
   {% if user.bio %}
     <p>{{user.bio}}</p>

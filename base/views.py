@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from .models import Post, Reply, User
 from .forms import PostForm, ReplyForm, UserForm, CustomUserCreationForm
+import cloudinary.uploader
 
 # Create your views here.
 def loginPage(request):
@@ -117,8 +118,8 @@ def updatePost(request, pk):
     return render(request, 'base/post_form.html', context)
 
 @login_required(login_url='login')
-def profile(request):
-    user = request.user
+def profile(request, pk):
+    user = User.objects.get(id=pk)
     posts = Post.objects.filter(user=user)
     context = {'user': user, 'posts': posts}
     return render(request, 'base/profile.html', context)
