@@ -16,6 +16,7 @@ import environ
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import dj_database_url
 
 # Initialise environment variables
 env = environ.Env()
@@ -102,6 +103,11 @@ DATABASES = {
         'CONN_MAX_AGE': 500,
     }
 }
+
+DATABASES['default'] = dj_database_url.config(
+    conn_max_age=600,
+    conn_health_checks=True,
+)
 
 
 # Password validation
