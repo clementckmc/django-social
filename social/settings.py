@@ -17,6 +17,8 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import dj_database_url
+import django_on_heroku
+from decouple import config
 
 # Initialise environment variables
 env = environ.Env()
@@ -35,7 +37,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://django-social-ckmc.herokuapp.com/', '127.0.0.1']
 
 
 # Application definition
@@ -58,6 +60,7 @@ AUTH_USER_MODEL = 'base.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -182,7 +185,4 @@ cloudinary.config(
 )
 
 # Configure Django App for Heroku.
-import django_on_heroku
 django_on_heroku.settings(locals())
-
-DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
