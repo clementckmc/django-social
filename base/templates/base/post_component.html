@@ -1,12 +1,19 @@
+{% load cloudinary %}
 {% for post in posts %}
 <div class="card border-light mx-auto mt-3">
   <div class="card-header bg-light d-flex justify-content-between">
-    <h5>{{post.user}}</h5>
+    <a href="{% url 'profile' post.user.id %}">
+      <div class="d-flex align-items-center">
+        {% cloudinary post.user.avatar.name class='avatar mx-3' %}
+        <h5 class="align-bottom">{{post.user}}</h5>
+      </div>
+    </a>
     <p class="text-muted">{{post.updated}}</p>
   </div>
   <a href="{% url 'post' post.id %}">
     <div class="card-body">
       <p class="card-text">{{post.content}}</p>
+      {% cloudinary post.photo.name width=750 height=400 %}
     </div>
   </a>
     <div class="card-footer">

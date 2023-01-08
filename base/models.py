@@ -11,6 +11,7 @@ class Post(models.Model):
     content = models.TextField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+    photo = models.ImageField(upload_to='images/', blank=True, null=True)
 
     class Meta:
         ordering = ['-updated', '-created'] # newest items first

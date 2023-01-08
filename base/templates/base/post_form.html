@@ -11,10 +11,11 @@
     <h2 class="mb-5">New post</h2>
   {% endif %}
   <h5 class="mb-3">{{request.user.username}}</h5>
-  <form method="POST" action="">
+  <form method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="mb-3">
       {{form.content}}
+      {{form.photo}}
     </div>
     <input type="submit" value="Submit" class="input-btn">
   </form>

@@ -10,7 +10,7 @@ class CustomUserCreationForm(UserCreationForm):
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['content']
+        fields = ['content', 'photo']
         widgets = {
             'content': Textarea(attrs={'class': 'form-control', 'placeholder': 'How are you doing?', 'cols': 20, 'rows': 5})
         }
