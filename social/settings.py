@@ -28,7 +28,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 IS_HEROKU = "DYNO" in os.environ
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -58,6 +57,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'cloudinary',
     'cloudinary_storage',
+    "whitenoise.runserver_nostatic",
 ]
 
 AUTH_USER_MODEL = 'base.User'
@@ -187,6 +187,8 @@ COMPRESS_PRECOMPILERS = [
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
 # cloudinary
 CLOUDINARY_STORAGE = {
