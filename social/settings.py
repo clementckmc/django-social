@@ -36,10 +36,13 @@ IS_HEROKU = "DYNO" in os.environ
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if not IS_HEROKU:
+    DEBUG = True
 
-ALLOWED_HOSTS = ['django-social-ckmc.herokuapp.com', '127.0.0.1']
-
+if IS_HEROKU:
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = []
 
 # Application definition
 
