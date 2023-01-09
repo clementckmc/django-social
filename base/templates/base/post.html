@@ -7,7 +7,7 @@
   <a href="{% url 'home' %}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-arrow-left"></i></a>
   <div class="card border-light mx-auto mt-3">
     <div class="card-header bg-light d-flex justify-content-between">
-      <a href="{% url 'profile' post.user.id %}"><h5>{{post.user}}</h5></a>
+      <a href="{% url 'profile' post.user.id%}"><h5>{{post.user}}</h5></a>
       <div class="d-flex">
         <p class="text-muted me-3">{{post.updated}}</p>
         {% if request.user == post.user %}

@@ -1,0 +1,15 @@
+.card {
+  max-width: 50rem;
+  a {
+    text-decoration: none;
+    color: black;
+    :hover {
+      color: black;
+    }
+  }
+}
+
+.card:hover {
+  border-color: #38D1F0!important;
+  transition: 0.5s;
+}

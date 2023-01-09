@@ -16,8 +16,6 @@ import environ
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-import dj_database_url
-import django_on_heroku
 
 # Initialise environment variables
 env = environ.Env()
@@ -26,7 +24,6 @@ environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-IS_HEROKU = "DYNO" in os.environ
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -35,15 +32,10 @@ IS_HEROKU = "DYNO" in os.environ
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# if not IS_HEROKU:
-#     DEBUG = True
+DEBUG = True
 
-if IS_HEROKU:
-    ALLOWED_HOSTS = ["*"]
-else:
-    ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []
 
-DEBUG_PROPAGATE_EXCEPTIONS = True
 
 # Application definition
 
@@ -59,14 +51,12 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'cloudinary',
     'cloudinary_storage',
-    "whitenoise.runserver_nostatic",
 ]
 
 AUTH_USER_MODEL = 'base.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -97,13 +87,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'social.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-MAX_CONN_AGE = 600
-
 DATABASES = {
     'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': env("DB_NAME"),
         'USER': env("DB_USER"),
@@ -112,20 +102,6 @@ DATABASES = {
         'PORT': env("DB_PORT"),
     }
 }
-
-if "DATABASE_URL" in os.environ:
-    # Configure Django for DATABASE_URL environment variable.
-    DATABASES["default"] = dj_database_url.config(
-        conn_max_age=MAX_CONN_AGE, ssl_require=True)
-
-    # Enable test database if found in CI environment.
-    if "CI" in os.environ:
-        DATABASES["default"]["TEST"] = DATABASES["default"]
-
-# DATABASES['default'] = dj_database_url.config(
-#     conn_max_age=600,
-#     conn_health_checks=True,
-# )
 
 
 # Password validation
@@ -162,8 +138,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATIC_URL = "static/"
+STATIC_URL = 'static/'
 
 MEDIA_URL = '/media/'
 
@@ -177,25 +152,15 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # SCSS
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/styles/')
-# STATICFILES_FINDERS = [
-#     'django.contrib.staticfiles.finders.FileSystemFinder',
-#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#     'compressor.finders.CompressorFinder',
-# ]
-# COMPRESS_PRECOMPILERS = [
-#     ('text/x-scss', 'django_libsass.SassCompiler'),
-# ]
-
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-WHITENOISE_USE_FINDERS = True
-WHITENOISE_MANIFEST_STRICT = False
-WHITENOISE_ALLOW_ALL_ORIGINS = True
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/styles/')
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+]
+COMPRESS_PRECOMPILERS = [
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+]
 
 # cloudinary
 CLOUDINARY_STORAGE = {
@@ -210,6 +175,3 @@ cloudinary.config(
   api_secret = env("API_SECRET"),
   secure = True
 )
-
-# Configure Django App for Heroku.
-django_on_heroku.settings(locals())
