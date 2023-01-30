@@ -7,7 +7,7 @@
   <a href="{% url 'home' %}" type="button" class="btn btn-outline-secondary mb-3"><i class="fa-solid fa-arrow-left"></i></a>
   <div class="card border-light mx-auto mt-3">
     <div class="card-header bg-light d-flex justify-content-between">
-      <a href="{% url 'profile' post.user.id%}"><h5>{{post.user}}</h5></a>
+      <a href="{% url 'profile' post.user.id%}"><h5>{% cloudinary post.user.avatar.name class='avatar mx-3' %}{{post.user}}</h5></a>
       <div class="d-flex">
         <p class="text-muted me-3">{{post.updated}}</p>
         {% if request.user == post.user %}
@@ -25,10 +25,14 @@
     <div class="card-body">
 
       <p class="card-text">{{post.content}}</p>
+      {% if post.photo %}
+        {% cloudinary post.photo.name width=750 height=400 class='mb-1' %}
+      {% endif %}
       <i class="fa-regular fa-thumbs-up"></i> {{post.get_like_count}}
       {% for reply in replies %}
         <hr>
-        {{reply.user.username}}: {{reply.body}}
+        <a href="{% url 'profile' reply.user.id%}" class="mb-2"><p style="font-weight: bold">{% cloudinary reply.user.avatar.name class='avatar mx-1' %} {{reply.user.username}}</p></a>
+        {{reply.body}}
       {% endfor %}
       <hr>
 
@@ -37,7 +41,7 @@
           {% csrf_token %}
           <input type="hidden" name="reply">
           <div class="input-group">
-            <span class="input-group-text">{{request.user.username}}</span>
+            <span class="input-group-text">{% cloudinary post.user.avatar.name class='avatar' %}</span>
             <textarea class="form-control" aria-label="With textarea" rows="2" name="body" placeholder="Reply to this post"></textarea>
           </div>
           <div class="d-flex flex-row-reverse">
