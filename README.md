@@ -1,6 +1,8 @@
 # django-social
 Social Network Web App built by Django framework
 
+App Home: https://django-social-ckmc.herokuapp.com/
+
 ## Setup
 
 The first thing to do is to clone the repository:
