@@ -2,6 +2,7 @@
 Social Network Web App built by Django framework
 
 App Home: https://django-social-ckmc.herokuapp.com/
+<img width="1440" alt="social" src="https://user-images.githubusercontent.com/46878585/217751915-63256f25-25c1-4f49-b74c-ff23e0c1a7e1.png">
 
 ## Setup
 
